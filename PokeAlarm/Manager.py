@@ -701,10 +701,11 @@ class Manager(object):
 
     # Returns the name of the location based on lat and lng
     def reverse_location(self, lat, lng):
+        details = {'street_num':'', 'street':'', 'address':'', 'postal':'', 'neighborhood':'',
+                   'sublocality':'', 'city':'', 'county':'', 'state':'', 'country':''}
         if self.__gmaps_client is None:  # Check if key was provided
             log.error("No Google Maps API key provided - unable to reverse geocode.")
-            return {}
-        details = {}
+            return details
         try:
             result = self.__gmaps_client.reverse_geocode((lat, lng))[0]
             loc = {}
